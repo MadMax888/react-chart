@@ -1,5 +1,7 @@
 /* eslint no-param-reassign: 0 */
+/* global System */
 import { createStore, applyMiddleware, compose } from 'redux';
+
 import createReducer from './reducers';
 
 export default (initialState = {}) => {

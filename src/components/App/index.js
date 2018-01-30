@@ -1,26 +1,42 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 
+import { loadTest, saveTest } from './actions';
 
-// import { Route, Switch, Redirect } from 'react-router-dom';
-// import PropTypes from 'prop-types';
-// import loadAsync from '../loadAsync';
-// // import Auth from '../Auth';
-// import Home from '../Home';
+class App extends Component {
+  static state = {}
 
-// const AuthAsync = loadAsync('Auth');
+  handleClick = (ev) => {
+    console.log('ev -- ', ev);
+    this.props.loadTest({ testData: 666 });
+  }
 
-
-const App = props => (<h1>APP : !!!!!</h1>);
+  render() {
+    return (
+      <div>
+        <button onClick={this.handleClick}>click me </button>
+        <h1>{this.props.user}</h1>
+      </div>);
+  }
+}
 
 App.propTypes = {
-  state: PropTypes.object,
+  user: PropTypes.object,
+  loadTest: PropTypes.func,
 };
 
-const mapStateToProps = state => ({
-  user: state.user
+const mapStateToProps = (state, props) => ({
+  user: state.testData
 });
 
-export default connect(mapStateToProps)(App);
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch,
+    loadTest: data => dispatch(loadTest(data)),
+    saveTest: data => dispatch(saveTest(data)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
