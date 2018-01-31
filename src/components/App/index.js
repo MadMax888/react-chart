@@ -17,18 +17,18 @@ class App extends Component {
     return (
       <div>
         <button onClick={this.handleClick}>click me </button>
-        <h1>{this.props.user}</h1>
+        <h1>{this.props.testVal}</h1>
       </div>);
   }
 }
 
 App.propTypes = {
-  user: PropTypes.object,
+  testVal: PropTypes.any,
   loadTest: PropTypes.func,
 };
 
 const mapStateToProps = (state, props) => ({
-  user: state.testData
+  testVal: state.app.testData
 });
 
 function mapDispatchToProps(dispatch) {
