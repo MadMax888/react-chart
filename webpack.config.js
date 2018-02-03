@@ -39,9 +39,12 @@ config.merge({
         use: ['babel-loader', 'eslint-loader']
       },
       {
-        test: /\.css$/,
+        // test: /\.css$/,
+        test: /\.scss$/,
         use: [
-          'style-loader',
+          {
+            loader: 'style-loader' // creates style nodes from JS strings
+          },
           {
             loader: 'css-loader',
             options: {
@@ -60,6 +63,12 @@ config.merge({
                 autoprefixer()
               ]
             }
+          },
+          {
+            loader: 'sass-loader',
+            // options: {
+            //   includePaths: ['absolute/path/a', 'absolute/path/b']
+            // }
           }
         ]
       }

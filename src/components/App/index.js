@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 
 import { loadTest, saveTest } from './actions';
 
+import styles from './styles.scss';
+
 class App extends Component {
   static state = {}
 
@@ -15,7 +17,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className={styles.test}>
         <button onClick={this.handleClick}>click me </button>
         <h1>{this.props.testVal}</h1>
       </div>);
