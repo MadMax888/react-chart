@@ -1,0 +1,15 @@
+.trades-table-block {
+  background: #F2F2F2;
+  box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  border-radius: 3px;
+  padding: 20px;
+  table {
+    thead {
+      th {
+        color: #000;
+        background-color: #E7EBF0;
+        border-color: #E7EBF0;
+      }
+    }
+  }
+}

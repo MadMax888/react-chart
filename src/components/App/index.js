@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 
 import CurrencyPreview from '../CurrencyPreview';
 import OrderForm from '../OrderForm';
+import CurrencyChart from '../CurrencyChart';
+import TradesTable from '../TradesTable';
 
 import { loadTest, saveTest } from './actions';
 
@@ -27,11 +29,13 @@ class App extends Component {
               <CurrencyPreview />
               <OrderForm />
             </div>
-            <div className='col-sm-8'>
-              <div className={styles.test}>
+            <div className='col-sm-9'>
+              <CurrencyChart />
+              <TradesTable />
+              {/* <div className={styles.test}>
                 <button onClick={this.handleClick}>click me </button>
                 <h1>{this.props.testVal}</h1>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
