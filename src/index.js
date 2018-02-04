@@ -1,3 +1,4 @@
+/* eslint global-require: "error" */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -14,7 +15,7 @@ const render = (store) => {
     <AppContainer>
       <Provider store={store}>
         <Router>
-          <Route exact path="/" component={App} />
+          <Route exact path='/' component={App} />
         </Router>
       </Provider>
     </AppContainer>,
@@ -25,5 +26,6 @@ const render = (store) => {
 render(createStore());
 
 if (module.hot) {
-  module.hot.accept('./components/App', () => { render(); });
+  // const NextApp = require('./components/App').default;
+  module.hot.accept('./components/App', () => render(App));
 }

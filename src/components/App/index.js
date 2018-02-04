@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import { connect } from 'react-redux';
 
+import CurrencyPreview from '../CurrencyPreview';
+import OrderForm from '../OrderForm';
+
 import { loadTest, saveTest } from './actions';
+
 
 import styles from './styles.scss';
 
@@ -11,16 +14,29 @@ class App extends Component {
   static state = {}
 
   handleClick = (ev) => {
-    console.log('ev -- ', ev);
-    this.props.loadTest({ testData: 666 });
+    console.log('event -- ', ev);
+    this.props.loadTest({ testData: this.props.testVal });
   }
 
   render() {
     return (
-      <div className={styles.test}>
-        <button onClick={this.handleClick}>click me </button>
-        <h1>{this.props.testVal}</h1>
-      </div>);
+      <div className={styles.wrapper}>
+        <div className='container-fluid'>
+          <div className='row'>
+            <div className='col-sm-3'>
+              <CurrencyPreview />
+              <OrderForm />
+            </div>
+            <div className='col-sm-8'>
+              <div className={styles.test}>
+                <button onClick={this.handleClick}>click me </button>
+                <h1>{this.props.testVal}</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   }
 }
 
@@ -29,7 +45,7 @@ App.propTypes = {
   loadTest: PropTypes.func,
 };
 
-const mapStateToProps = (state, props) => ({
+const mapStateToProps = state => ({
   testVal: state.app.testData
 });
 

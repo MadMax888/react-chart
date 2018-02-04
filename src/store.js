@@ -5,7 +5,6 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import createReducer from './reducers';
 
 export default (initialState = {}) => {
-
   const devtools = window.devToolsExtension || (() => noop => noop);
 
   const middlewares = [];
