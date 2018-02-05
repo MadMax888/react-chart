@@ -7,13 +7,20 @@ import OrderForm from '../OrderForm';
 import CurrencyChart from '../CurrencyChart';
 import TradesTable from '../TradesTable';
 
-import { loadTest, saveTest } from './actions';
+import { loadTest, saveTest, startStream, stopStream } from './actions';
 
 
 import styles from './styles.scss';
 
 class App extends Component {
   static state = {}
+
+  componentDidMount() {
+    this.props.startStream();
+  }
+  componentWillUmount() {
+    this.props.stopStream();
+  }
 
   handleClick = (ev) => {
     console.log('event -- ', ev);
@@ -47,6 +54,8 @@ class App extends Component {
 App.propTypes = {
   testVal: PropTypes.any,
   loadTest: PropTypes.func,
+  startStream: PropTypes.func,
+  stopStream: PropTypes.func,
 };
 
 const mapStateToProps = state => ({
@@ -58,6 +67,8 @@ function mapDispatchToProps(dispatch) {
     dispatch,
     loadTest: data => dispatch(loadTest(data)),
     saveTest: data => dispatch(saveTest(data)),
+    startStream: () => dispatch(startStream()),
+    stopStream: () => dispatch(stopStream()),
   };
 }
 

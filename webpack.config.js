@@ -39,7 +39,6 @@ config.merge({
         use: ['babel-loader', 'eslint-loader']
       },
       {
-        // test: /\.css$/,
         test: /\.scss$/,
         use: [
           {
