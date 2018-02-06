@@ -3,6 +3,7 @@ import {
   SAVE_TEST_CON,
   RUN_TRADE_STREAM,
   STOP_TRADE_STREAM,
+  SAVE_STREAM_DATA,
 } from './constants';
 
 export function loadTest(data) {
@@ -37,7 +38,7 @@ export function stopStream() {
 export function saveStreamData(data) {
   console.log('saveStreamData -- ', data);
   return {
-    type: STOP_TRADE_STREAM,
+    type: SAVE_STREAM_DATA,
     payload: data
   };
 }
