@@ -22,10 +22,6 @@ class App extends Component {
     this.props.stopStream();
   }
 
-  handleClick = (ev) => {
-    console.log('event -- ', ev);
-    this.props.loadTest({ testData: this.props.testVal });
-  }
 
   render() {
     return (
@@ -39,10 +35,6 @@ class App extends Component {
             <div className='col-sm-9'>
               <CurrencyChart />
               <TradesTable />
-              {/* <div className={styles.test}>
-                <button onClick={this.handleClick}>click me </button>
-                <h1>{this.props.testVal}</h1>
-              </div> */}
             </div>
           </div>
         </div>
@@ -52,15 +44,11 @@ class App extends Component {
 }
 
 App.propTypes = {
-  testVal: PropTypes.any,
-  loadTest: PropTypes.func,
   startStream: PropTypes.func,
   stopStream: PropTypes.func,
 };
 
-const mapStateToProps = state => ({
-  testVal: state.app.testData
-});
+const mapStateToProps = state => ({});
 
 function mapDispatchToProps(dispatch) {
   return {

@@ -1,25 +1,25 @@
 import {
-  LOAD_TEST_CON,
-  SAVE_STREAM_DATA,
+  SAVE_CHART_DATA,
+  SAVE_TRADES_DATA,
 } from './constants';
 
 // The initial state of the App
 const initialState = {
-  testData: null
+  chartData: [],
+  tradesData: [],
 };
 
 function appReducer(state = initialState, action) {
-  // console.log('red action tr', action);
   switch (action.type) {
-    case LOAD_TEST_CON:
+    case SAVE_TRADES_DATA:
       return {
         ...state,
-        testData: action.data.testData + 1,
+        tradesData: [...state.tradesData, action.payload]
       };
-    case SAVE_STREAM_DATA:
-      console.log('reducer SAVE_STREAM_DATA -- ', action);
+    case SAVE_CHART_DATA:
       return {
         ...state,
+        chartData: [...state.chartData, action.payload]
       };
     default:
       return state;

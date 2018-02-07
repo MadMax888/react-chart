@@ -5,33 +5,30 @@ import {
   STOP_TRADE_STREAM,
 } from './constants';
 
-import { saveStreamData } from './actions';
+import { saveChartData, saveTradesData } from './actions';
 
-const socket = Observable.webSocket({
+const socket$ = Observable.webSocket({
   url: 'ws://localhost:8080/stream',
 });
 
 const websocketTradesEpic = action$ =>
   action$.ofType(RUN_TRADE_STREAM)
-    .mergeMap((action) => {
-      // Observable.webSocket
-      console.log('websocketTradesEpic  -- ', action);
-     return socket
-        .do(x => console.log("Message is : ", x))
-        .takeUntil(action$.ofType(STOP_TRADE_STREAM).do(x => console.log("Action Type is : ", x)))
-        .map(payload => {
-          console.log(payload);
-          return saveStreamData(payload);
-        })
-        .catch((err) => {
-          console.log('ws error', err);
-          return Observable.of({ type: 'ERROR' });
-        });
-        // .subscribe(
-        //   msg => console.log('message received: ', msg),
-        //   err => console.log(err),
-        //   () => console.log('complete')
-        // });
-    });
+    .mergeMap(() => socket$
+      .map((payload) => {
+        switch (payload.type) {
+          case 'TRADE':
+            return saveTradesData(payload);
+          case 'PRICE':
+            return saveChartData(payload);
+          default:
+            // console.log('payload def -- ', payload);
+            return payload;
+        }
+      })
+      .takeUntil(action$.ofType(STOP_TRADE_STREAM))
+      .catch((err) => {
+        console.error('ws error', err);
+        return Observable.of({ type: 'ERROR' });
+      }));
 
 export default websocketTradesEpic;
