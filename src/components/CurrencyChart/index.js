@@ -20,7 +20,7 @@ const convertData = arr => arr.map(item => ({
 class CurrencyChart extends Component {
   state = {
     dateRange: {
-      max: new Date().getTime() + 30000,
+      max: new Date().getTime() + 300000,
       min: new Date().getTime()
     }
   }
@@ -37,7 +37,7 @@ class CurrencyChart extends Component {
               dataKey='label'
               // type='number'
               height={60}
-              domain={[this.state.dateRange.min, this.state.dateRange.max]}
+              domain={[() => this.state.dateRange.min, () => this.state.dateRange.max]}
             />
             <YAxis
               dataKey='amt'
