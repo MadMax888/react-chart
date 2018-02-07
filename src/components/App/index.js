@@ -13,7 +13,7 @@ import { startStream, stopStream } from './actions';
 import styles from './styles.scss';
 
 class App extends Component {
-  static state = {} // eslint-disable-line object-curly-newline
+  state = {} // eslint-disable-line object-curly-newline
 
   componentDidMount() {
     this.props.startStream();
