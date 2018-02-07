@@ -21,7 +21,6 @@ const websocketTradesEpic = action$ =>
           case 'PRICE':
             return saveChartData(payload);
           default:
-            // console.log('payload def -- ', payload);
             return payload;
         }
       })

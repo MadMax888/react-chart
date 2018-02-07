@@ -1,5 +1,4 @@
 /* eslint no-param-reassign: 0 */
-// eslint-disable-line object-curly-newline
 /* global System */
 import { createStore, applyMiddleware, compose } from 'redux';
 import { createEpicMiddleware } from 'redux-observable';
@@ -50,7 +49,6 @@ export default (initialState = {}) => { // eslint-disable-line object-curly-newl
 
   if (module.hot) {
     module.hot.accept('./epics', () => {
-      // const rootEpic = require('./where-ever-they-are').default;
       epicMiddleware.replaceEpic(createEpic);
     });
   }

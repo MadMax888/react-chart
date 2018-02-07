@@ -65,9 +65,6 @@ config.merge({
           },
           {
             loader: 'sass-loader',
-            // options: {
-            //   includePaths: ['absolute/path/a', 'absolute/path/b']
-            // }
           }
         ]
       }

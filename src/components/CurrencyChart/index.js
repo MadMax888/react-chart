@@ -14,7 +14,7 @@ const convertData = arr => arr.map(item => ({
   label: new Date(item.timestamp).toLocaleTimeString('en-GB'),
   name: item.timestamp,
   amt: item.data,
-  pv: item.data,
+  price: item.data,
 }));
 
 class CurrencyChart extends Component {
@@ -47,7 +47,7 @@ class CurrencyChart extends Component {
             <CartesianGrid strokeDasharray='3 3' />
             <Tooltip />
             <Legend />
-            <Line type='monotone' dataKey='pv' stroke='#8884d8' />
+            <Line type='monotone' dataKey='price' stroke='#8884d8' />
           </LineChart>
         </ResponsiveContainer>
       </div>

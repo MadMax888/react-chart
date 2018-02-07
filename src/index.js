@@ -26,6 +26,5 @@ const render = (store) => {
 render(createStore());
 
 if (module.hot) {
-  // const NextApp = require('./components/App').default;
   module.hot.accept('./components/App', () => render(App));
 }
