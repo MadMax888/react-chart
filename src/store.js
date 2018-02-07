@@ -1,4 +1,5 @@
 /* eslint no-param-reassign: 0 */
+// eslint-disable-line object-curly-newline
 /* global System */
 import { createStore, applyMiddleware, compose } from 'redux';
 import { createEpicMiddleware } from 'redux-observable';
@@ -6,7 +7,7 @@ import { createEpicMiddleware } from 'redux-observable';
 import createReducer from './reducers';
 import createEpic from './epics';
 
-export default (initialState = {}) => {
+export default (initialState = {}) => { // eslint-disable-line object-curly-newline
   const devtools = window.devToolsExtension || (() => noop => noop);
 
   const epicMiddleware = createEpicMiddleware(createEpic);
@@ -28,7 +29,7 @@ export default (initialState = {}) => {
     compose(...enhancers),
   );
 
-  store.asyncReducers = {};
+  store.asyncReducers = {}; // eslint-disable-line object-curly-newline
 
   if (process.env.NODE_ENV === 'development') {
     window.store = store;

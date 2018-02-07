@@ -28,7 +28,7 @@ const websocketTradesEpic = action$ =>
       .takeUntil(action$.ofType(STOP_TRADE_STREAM))
       .catch((err) => {
         console.error('ws error', err);
-        return Observable.of({ type: 'ERROR' });
+        return Observable.of({ type: 'ERROR' }); // eslint-disable-line object-curly-newline
       }));
 
 export default websocketTradesEpic;

@@ -7,34 +7,45 @@ import OrderForm from '../OrderForm';
 import CurrencyChart from '../CurrencyChart';
 import TradesTable from '../TradesTable';
 
-import { loadTest, saveTest, startStream, stopStream } from './actions';
+import { startStream, stopStream } from './actions';
 
 
 import styles from './styles.scss';
 
 class App extends Component {
-  static state = {}
+  static state = {} // eslint-disable-line object-curly-newline
 
   componentDidMount() {
     this.props.startStream();
   }
+
+  getCurrentBTCprice() {
+    const data = this.props.chartData;
+
+    return data[data.length - 1];
+  }
+
+  getCurrentTrades() {
+    const data = this.props.tradesData;
+
+    return [...data.slice(data.length - 10, data.length)];
+  }
+
   componentWillUmount() {
     this.props.stopStream();
   }
-
-
   render() {
     return (
       <div className={styles.wrapper}>
         <div className='container-fluid'>
           <div className='row'>
             <div className='col-sm-3'>
-              <CurrencyPreview />
+              <CurrencyPreview previewData={this.getCurrentBTCprice()} />
               <OrderForm />
             </div>
             <div className='col-sm-9'>
               <CurrencyChart />
-              <TradesTable />
+              <TradesTable data={this.getCurrentTrades()} />
             </div>
           </div>
         </div>
@@ -46,15 +57,18 @@ class App extends Component {
 App.propTypes = {
   startStream: PropTypes.func,
   stopStream: PropTypes.func,
+  chartData: PropTypes.array,
+  tradesData: PropTypes.array,
 };
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  tradesData: state.app.tradesData,
+  chartData: state.app.chartData,
+}); // eslint-disable-line object-curly-newline
 
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
-    loadTest: data => dispatch(loadTest(data)),
-    saveTest: data => dispatch(saveTest(data)),
     startStream: () => dispatch(startStream()),
     stopStream: () => dispatch(stopStream()),
   };
