@@ -44,7 +44,7 @@ class App extends Component {
               <OrderForm />
             </div>
             <div className='col-sm-9'>
-              <CurrencyChart />
+              <CurrencyChart data={this.props.chartData} />
               <TradesTable data={this.getCurrentTrades()} />
             </div>
           </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
@@ -31,25 +31,38 @@ const data = [ // testdata
 const margin = {
   top: 20, right: 30, left: 20, bottom: 10
 };
+// from current date
+const convertData = (arr) => {
+  return arr.map(item => ({
+    name: item.timestamp,
+    label: new Date(item.timestamp).toLocaleTimeString('en-GB'),
+    amt: item.data,
+    pv: item.data,
+  }));
+};
 
-const CurrencyChart = () => (
+const CurrencyChart = props => (
   <div className={styles.currencyChart}>
     <ResponsiveContainer width='100%' height={400}>
       <LineChart
-        data={data}
+        data={convertData(props.data || null)}
         margin={margin}
       >
-        <XAxis dataKey='name' height={60} />
-        <YAxis />
+        <XAxis dataKey='name' type='number' height={60} domain={[dataMin => (dataMin), dataMax => (dataMax)]} />
+        {/* <YAxis data='amt'/> */}
+        <YAxis dataKey='amt' type='number' domain={[dataMin => (Math.abs(dataMin - 5)), dataMax => (dataMax + 5)]} />
         <CartesianGrid strokeDasharray='3 3' />
         <Tooltip />
         <Legend />
         <Line type='monotone' dataKey='pv' stroke='#8884d8' />
-        <Line type='monotone' dataKey='uv' stroke='#82ca9d' />
       </LineChart>
     </ResponsiveContainer>
   </div>
 );
+
+CurrencyChart.propTypes = {
+  data: PropTypes.array,
+}
 
 export default CurrencyChart;
 
